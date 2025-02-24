@@ -1,91 +1,81 @@
-# AI/Machine Learning Intern Challenge: Simple Content-Based Recommendation
+# Movie Recommendation System
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
+A content-based movie recommendation system that uses TF-IDF vectorization to find movies similar to user queries. The system considers movie titles, overviews, keywords, genres, cast, and directors to make recommendations.
 
----
+## Dataset
+The dataset is retrieved from: [source](https://www.kaggle.com/datasets/utkarshx27/movies-dataset/data). I edited it to contain only 500 rows of movies for demonstration purposes. 
+The dataset (`movies_dataset.csv`) contains movie information of:
+- Original title
+- Overview
+- Keywords
+- Genres
+- Cast
+- Director
+  etc.
 
-## Overview
+The dataset file is in the directory of the project, so there is no need to do anything as long as you follow the instructions from the [video](https://www.loom.com/share/6ce844759ec14401a231a76370c92a3d?sid=765194c4-a7f3-4da5-8f84-16c309bd8594)
 
-Build a **content-based recommendation system** that, given a **short text description** of a user’s preferences, suggests **similar items** (e.g., movies) from a small dataset. This challenge should take about **3 hours**, so keep your solution **simple** yet **functional**.
+## Setup
 
-### Example Use Case
+### Requirements
+- Python 3.8+
+- pandas
+- scikit-learn
 
-- The user inputs:  
-  *"I love thrilling action movies set in space, with a comedic twist."*  
-- Your system processes this description (query) and compares it to a dataset of items (e.g., movies with their plot summaries or keywords).  
-- You then return the **top 3–5 “closest” matches** to the user.
+### Installation
 
----
+1. Create and activate a virtual environment (optional):
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+```
+#### <i> Note: Dependencies are installed within the Jupyter notebook, no need to do additional steps </i>
 
-## Requirements
+## Running the System using Jupyter Notebook 
+1. Start Jupyter
+2. Open `recommendation.ipynb`
+3. Run all cells
+4. Modify the `user_query` variable to get different recommendations
 
-1. **Dataset**  
-   - Use a **small** public dataset of items (e.g., a list of movies with plot summaries, or other textual descriptions).  
-   - Make sure the dataset is easy to handle (maybe 100–500 rows) so the solution remains quick to implement and run.  
-   - Include the dataset in your forked repository *or* provide instructions/link on how to download it.  
 
-2. **Approach**  
-   - **Content-Based**: At a minimum, use text similarity to recommend items.  
-     - For instance, you can transform both the user’s text input and each item’s description into TF-IDF vectors and compute **cosine similarity**.  
-   - Return the **top N** similar items (e.g., top 5).
+## Input Data: 
+A user query with a movie preference. 
+## Output Data: 
+A sorted list of movies with a title, a similarity score, an overview, and genres. 
+## Example Results
 
-3. **Code Organization**  
-   - You may use a **Jupyter Notebook** or **Python scripts**.  
-   - Keep it **readable** and **modular** (e.g., one section for loading data, one for building vectors, one for computing similarity, etc.).  
-   - Briefly comment or docstring your key functions/sections.
+For the query "I love movies with Christian Bale", the system returns:
 
-4. **Output**  
-   - When given an input description (e.g., `"I like action movies set in space"`), your system should print or return a list of recommended items (e.g., 3–5 titles).  
-   - Include the similarity score or rank if you’d like.
+```
+Top 5 Recommendations:
+1. Batman Begins (ID: 119, score: 0.1660)
+   Keywords: himalaya martial arts dc comics crime fighter secret identity
+   Overview: Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.  Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.
+   Genres: Action Crime Drama
 
-5. **Summary & Instructions**  
-   - A short `README.md` that includes:
-     - **Dataset**: Where it’s from, any steps to load it.  
-     - **Setup**: Python version, virtual environment instructions, and how to install dependencies (`pip install -r requirements.txt`).  
-     - **Running**: How to run your code (e.g., `python recommend.py "Some user description"` or open your notebook in Jupyter).  
-     - **Results**: A brief example of your system’s output for a sample query.
+2. Exodus: Gods and Kings (ID: 157, score: 0.1603)
+   Keywords: moses bible ancient egypt 3d ramses
+   Overview: The defiant leader Moses rises up against the Egyptian Pharaoh Ramses, setting 400,000 slaves on a monumental journey of escape from Egypt and its terrifying cycle of deadly plagues.
+   Genres: Adventure Drama Action
 
----
+3. 金陵十三釵 (ID: 317, score: 0.1597)
+   Keywords: forced prostitution child rape
+   Overview: A Westerner finds refuge with a group of women in a church during Japan's rape of Nanking in 1937. Posing as a priest, he attempts to lead the women to safety.
+   Genres: Drama History War
 
-## Deliverables
+4. Terminator Salvation (ID: 43, score: 0.1533)
+   Keywords: saving the world artificial intelligence prophecy san francisco cyborg
+   Overview: All grown up in post-apocalyptic 2018, John Connor must lead the resistance of humans against the increasingly dominating militaristic robots. But when Marcus Wright appears, his existence confuses the mission as Connor tries to determine whether Wright has come from the future or the past -- and whether he's friend or foe.
+   Genres: Action Science Fiction Thriller
 
-1. **Fork the Public Repository**  
-   - **Fork** this repo into your own GitHub account.
+5. The Dark Knight (ID: 65, score: 0.1396)
+   Keywords: dc comics crime fighter secret identity scarecrow sadism
+   Overview: Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.
+   Genres: Drama Action Crime Thriller
 
-2. **Implement Your Solution**  
-   - Load and preprocess your dataset (e.g., read CSV, handle text columns).  
-   - Convert text data to vectors (e.g., TF-IDF).  
-   - Implement a function to compute similarity between the user’s query and each item’s description.  
-   - Return the top matches.
-   - Salary expectation per month (Mandatory)
+```
 
-3. **Short Video Demo**  
-   - In a `.md` file (e.g., `demo.md`) within your fork, paste a link to a **brief screen recording** (video link).  
-   - Demonstrate:
-     - How you run the recommendation code.  
-     - A sample query and the results.
+The similarity score indicates how well each movie matches the query, with higher scores representing better matches.
 
-4. **Deadline**  
-   - Submit your fork by **Sunday, Feb 23th 11:59 pm PST**.
-
-> **Note**: This should be doable within ~3 hours. Keep it **straightforward**—you do **not** need advanced neural networks or complex pipelines. A simple TF-IDF + cosine similarity approach is sufficient.
-
----
-
-## Evaluation Criteria
-
-1. **Functionality**  
-   - Does your code run without errors?  
-   - When given an input query, does it successfully output relevant items?
-
-2. **Code Quality**  
-   - Clear, commented code (where it counts).  
-   - Logical steps (load data → transform → recommend).
-
-3. **Clarity**  
-   - Is your `README.md` straightforward about setup, how to run, and what to expect?
-
-4. **ML/Recommendation Understanding**  
-   - Basic implementation of a content-based recommendation approach (vectorization, similarity measure).
-
-**We look forward to seeing your solution!** Good luck!
+## Desired Salary:
+$1600/Month = $20/hr
